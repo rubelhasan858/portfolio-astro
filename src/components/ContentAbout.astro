@@ -1,0 +1,109 @@
+---
+import { Code } from 'astro:components';
+
+const code = `interface Developer {
+    name: string;
+    skills: string[];
+    interests: string[];
+};
+
+interface TechStack {
+    devOps: string[];
+    backend: string[];
+   frontend: string[];
+};
+
+type ContactType = 'github' | 'twitter' | 'linkedIn'  | 'email';
+
+const techStack: TechStack = {
+    devOps: [
+        'Git'
+        'GitHub',
+        'Cloudflare',
+        'Docker'
+    ],
+    frontend: [
+        'Astro',
+        'JavaScript',
+        'TailwindCSS',
+        'Bootstrap',
+        'SCSS',
+        'Markdown',
+        'WordPress'
+    ],
+    backend: [
+        'Laravel'
+        'Node.js',
+        'Firebase',
+        'PostgreSQL',
+        'MySQL',
+    ]
+};
+
+// Developer profile
+const me: Developer = {
+    name: 'Rubel Hasan',
+    skills: [
+        ...techStack.devOps,
+        ...techStack.backend,
+        ...techStack.frontend
+    ],
+    interests: [
+        'Open Source',
+        'Security',
+        'Privacy',
+        'Performance',
+        'Self-Hosting',
+        'Networking'
+    ]
+};
+
+// Contact function
+const contact = (type: ContactType): string => {
+    switch (type) {
+        case 'github':
+            return 'https://github.com/rubelhasan858';
+        case 'twitter':
+            return 'https://x.com/rubelhasan858';
+        case 'linkedIn':
+            return 'www.linkedin.com/in/md-rubel-hasan-930bb3376'; 
+        case 'email':
+            return 'rubelhasan858@gmail.com';
+        default:
+            return 'Send fax.';
+    }
+};
+
+`;
+---
+
+<Code
+    code={code}
+    lang="js"
+    wrap={true}
+/>
+
+<style is:global>
+
+    /* Custom styling for code block line numbers */
+    pre.astro-code {
+        @apply bg-transparent !important;
+    }
+
+    pre.astro-code code {
+        @apply block;
+        counter-reset: step;
+        counter-increment: step 0;
+    }
+
+    pre.astro-code code .line {
+        @apply relative;
+    }
+
+    pre.astro-code code .line::before {
+        content: counter(step);
+        counter-increment: step;
+        @apply text-gray-600 pr-2;
+    }
+
+</style>
